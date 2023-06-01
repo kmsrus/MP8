@@ -1,5 +1,5 @@
 #! /bin/bash
-
+##############################################################################################
 # Проверяем есть ли уже такие строки в файле sudoers. Вносим измеения если строки не найдены
 read -p "Введите имя пользователся: " USER_NEW
 if ! sudo grep -q "^Cmnd_Alias MPROOTCMD =" /etc/sudoers; then
@@ -19,8 +19,6 @@ if ! sudo grep -q "env_reset" /etc/sudoers; then
     echo "Defaults  env_reset" | sudo tee -a /etc/sudoers
 fi
 
-
-
 if ! sudo grep -q "^$USER_NEW ALL = (ALL) NOPASSWD: MPROOTCMD" /etc/sudoers; then
     echo "$USER_NEW ALL = (ALL) NOPASSWD: MPROOTCMD" | sudo tee -a /etc/sudoers
 fi
@@ -32,38 +30,31 @@ fi
 if ! sudo grep -q "^$USER_NEW ALL = (ALL) NOPASSWD: MPEXCPTNSCMD" /etc/sudoers; then
     echo "$USER_NEW ALL = (ALL) NOPASSWD: MPEXCPTNSCMD" | sudo tee -a /etc/sudoers
 fi
-
 echo "sudoers настроено"
-DIRECTORIA=/home/$USER_NEW/bin
+###############################################################################################
+
 # Проверяем существует ли директория $HOME/bin если нет то создаем
+DIRECTORIA=/home/$USER_NEW/bin
 if [ -d "$DIRECTORIA" ] ; then
   echo "Директория существует $DIRECTORIA"
 else
   sudo mkdir -p $DIRECTORIA
+  sudo chown -R $USER_NEW:$USER_NEW $DIRECTORIA
 fi
-# Проверяетм права доступа к домашней директории, должен быть равен 700
-
-if [[ "$(stat -c '%a' "/home/$USER_NEW")" != "700" ]]; then
-  # Если права доступа отличаются от 700, то изменяем их
-  sudo chmod 700 -R "/home/$USER_NEW"
-  echo "Установлены права доступа 700 для директории /home/$USER_NEW/"
-else
-  echo "Права доступа для директории /home/$USER_NEW уже установлены на 700"
-fi
+###############################################################################################
 
 # Указываем директорию, которую нужно добавить в PATH
 
-if ! sudo grep -q "^export PATH=" ~/.bashrc; then
-    echo "export PATH=$DIRECTORIA:$PATH" | sudo tee -a ~/.bashrc
+if ! sudo grep -q "^export PATH=" /home/$USER_NEW/.bashrc; then
+    echo "export PATH=$DIRECTORIA:$PATH" | sudo tee -a /home/$USER_NEW/.bashrc
     #source ~/.bashrc
     export PATH=$DIRECTORIA:$PATH
     echo "Добавлена директория $DIRECTORIA в PATH"
-    echo $PATH
 else
     # Если директория уже есть в PATH, выводим сообщение об этом
    echo "Директория $DIRECTORIA уже есть в PATH"
 fi
-
+###############################################################################################
 # Распаковываем содержимое архива bin.tar в директорию NEW_DIR_BIN
 if [ -f "$DIRECTORIA/.soft" ]; then
     echo "bit.tar уже распакован в $DIRECTORIA"
@@ -75,3 +66,13 @@ sudo tar -xvf $ARCHIV -C $DIRECTORIA >> $DIRECTORIA/.soft
 sudo mv $DIRECTORIA/bin/* $DIRECTORIA/
 sudo rm -r $DIRECTORIA/bin
 fi 
+###############################################################################################
+# Проверяетм права доступа к домашней директории, должен быть равен 700
+
+if [[ "$(stat -c '%a' "/home/$USER_NEW")" != "700" ]]; then
+  # Если права доступа отличаются от 700, то изменяем их
+  sudo chmod 700 -R "/home/$USER_NEW"
+  echo "Установлены права доступа 700 для директории /home/$USER_NEW/"
+else
+  echo "Права доступа для директории /home/$USER_NEW уже установлены на 700"
+fi
