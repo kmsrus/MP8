@@ -1,7 +1,9 @@
 #! /bin/bash
+# Скопируйте скрипт и архив bin.tar в домашнюю директорию.
+# Для выполнения скрипта, пользователь из под которого будет запущен скрипт должен быть добавлен в группу SUDO
 ##############################################################################################
 # Проверяем есть ли уже такие строки в файле sudoers. Вносим измеения если строки не найдены
-read -p "Введите имя пользователся: " USER_NEW
+read -p "Введите имя пользователся которого необходимо проверить: " USER_NEW
 if ! sudo grep -q "^Cmnd_Alias MPROOTCMD =" /etc/sudoers; then
     # Если строка не найдена, добавляем ее в файл
     echo "Cmnd_Alias MPROOTCMD = /usr/bin/at -l, /usr/bin/crontab * -l, /sbin/fdisk -l, /sbin/iptables-save, /bin/netstat, /bin/ss, /usr/sbin/dmidecode, /sbin/vgdisplay, /sbin/lvdisplay, /sbin/auditctl -[lv]" | sudo tee -a /etc/sudoers
@@ -76,3 +78,5 @@ if [[ "$(stat -c '%a' "/home/$USER_NEW")" != "700" ]]; then
 else
   echo "Права доступа для директории /home/$USER_NEW уже установлены на 700"
 fi
+
+

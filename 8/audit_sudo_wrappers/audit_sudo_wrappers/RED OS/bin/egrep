@@ -1,0 +1,5 @@
+#!/usr/bin/sh
+
+if [ -f /usr/bin/egrep ];
+        then /usr/bin/sudo /usr/bin/egrep "$@"
+fi

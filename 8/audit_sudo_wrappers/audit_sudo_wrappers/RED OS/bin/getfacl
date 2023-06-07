@@ -1,0 +1,5 @@
+#!/usr/bin/sh
+
+if [ -f /usr/bin/getfacl ];
+        then /usr/bin/sudo /usr/bin/getfacl "$@"
+fi

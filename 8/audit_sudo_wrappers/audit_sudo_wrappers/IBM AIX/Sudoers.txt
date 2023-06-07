@@ -1,0 +1,5 @@
+Cmnd_Alias MPROOTCMD = /usr/bin/crontab -l *, /bin/netstat, /usr/sbin/lsfilt
+Cmnd_Alias MPFILECMD =  /bin/cat, /usr/bin/find, /bin/ls, /usr/bin/test
+ 
+mpuser ALL = (ALL) NOPASSWD: MPROOTCMD
+mpuser ALL = (ALL) NOPASSWD: MPFILECMD

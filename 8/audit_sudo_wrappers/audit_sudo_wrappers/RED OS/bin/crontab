@@ -1,0 +1,5 @@
+#!/usr/bin/sh
+
+if [ -f /usr/bin/crontab ];
+        then /usr/bin/sudo /usr/bin/crontab "$@"
+fi
