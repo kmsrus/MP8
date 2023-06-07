@@ -1,0 +1,5 @@
+#!/bin/sh
+
+if [ -f /sbin/grubby ];
+	then /usr/bin/sudo /sbin/grubby "$@"
+fi

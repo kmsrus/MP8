@@ -1,0 +1,5 @@
+#!/bin/sh
+
+if [ -f /usr/bin/netstat ];
+	then /usr/local/bin/sudo /usr/bin/netstat "$@"
+fi

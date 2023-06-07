@@ -1,0 +1,5 @@
+#!/bin/sh
+
+if [ -f /usr/sbin/bootadm ];
+	then /usr/bin/sudo /usr/sbin/bootadm "$@"
+fi

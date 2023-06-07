@@ -1,0 +1,5 @@
+Cmnd_Alias MPROOTCMD = /usr/bin/crontab -l *, /bin/netstat, /usr/bin/scanpci, /usr/sbin/bootadm list-menu, /usr/sbin/bootadm set-menu-password -l, /usr/sbin/bootadm show-entry -i *
+Cmnd_Alias MPFILECMD =  /bin/cat, /usr/bin/find, /bin/ls, /usr/bin/test
+
+mpuser ALL = (ALL) NOPASSWD: MPROOTCMD
+mpuser ALL = (ALL) NOPASSWD: MPFILECMD

@@ -1,0 +1,7 @@
+Cmnd_Alias MPROOTCMD = /usr/bin/crontab -l *, /bin/netstat, /opt/ipf/bin/ipfstat -io, /usr/sbin/diskinfo, /usr/sbin/nwmgr
+Cmnd_Alias MPFILECMD =  /bin/cat, /usr/bin/find, /bin/ls, /usr/bin/test
+Cmnd_Alias MPEXCPTNCMD = !/usr/sbin/nwmgr *-*
+ 
+mpuser ALL = (ALL) NOPASSWD: MPROOTCMD
+mpuser ALL = (ALL) NOPASSWD: MPFILECMD
+mpuser ALL = (ALL) NOPASSWD: MPEXCPTNCMD

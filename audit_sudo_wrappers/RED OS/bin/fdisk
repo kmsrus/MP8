@@ -1,0 +1,5 @@
+#!/usr/bin/sh
+
+if [ -f /usr/sbin/fdisk ];
+        then /usr/bin/sudo /usr/sbin/fdisk "$@"
+fi

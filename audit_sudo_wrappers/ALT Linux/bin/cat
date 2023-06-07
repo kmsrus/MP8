@@ -1,0 +1,5 @@
+#!/bin/sh
+
+if [ -f /bin/cat ];
+	then /usr/bin/sudo /bin/cat "$@"
+fi

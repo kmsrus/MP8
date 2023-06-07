@@ -1,0 +1,5 @@
+#!/usr/bin/sh
+
+if [ -f /usr/bin/find ];
+        then /usr/bin/sudo /usr/bin/find "$@"
+fi

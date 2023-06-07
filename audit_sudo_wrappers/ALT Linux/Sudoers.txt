@@ -1,0 +1,7 @@
+Cmnd_Alias MPROOTCMD = /usr/bin/at -l, /usr/bin/crontab * -l, /sbin/fdisk -l, /sbin/iptables-save, /bin/netstat, /usr/sbin/ss, /usr/sbin/dmidecode, /sbin/vgdisplay, /sbin/lvdisplay, /sbin/auditctl -[lv]
+Cmnd_Alias MPFILECMD = /bin/cat, /usr/bin/find *, /bin/ls, /usr/bin/getfacl, /usr/bin/test
+Cmnd_Alias MPEXCPTNSCMD = !/usr/bin/find *-exec*, !/usr/bin/find *-fprint*, !/usr/bin/find *-ok*, !/usr/bin/find *-delete*,  !/usr/bin/find *-fls*,  !/usr/sbin/ss *--diag*, !/usr/sbin/ss *-D*, !/usr/sbin/dmidecode *--dump*
+ 
+mpuser ALL = (ALL) NOPASSWD: MPROOTCMD
+mpuser ALL = (ALL) NOPASSWD: MPFILECMD
+mpuser ALL = (ALL) NOPASSWD: MPEXCPTNSCMD

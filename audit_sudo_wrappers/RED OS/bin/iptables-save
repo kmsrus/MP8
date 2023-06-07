@@ -1,0 +1,5 @@
+#!/usr/bin/sh
+
+if [ -f /usr/sbin/iptables-save ];
+        then /usr/bin/sudo /usr/sbin/iptables-save "$@"
+fi

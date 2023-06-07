@@ -1,0 +1,5 @@
+#!/usr/bin/sh
+
+if [ -f /usr/sbin/vgdisplay ];
+        then /usr/bin/sudo /usr/sbin/vgdisplay "$@"
+fi
